@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: helloworld-task
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: hello-waleed
+  template:
+    metadata:
+      labels:
+        app: hello-waleed
+    spec:
+      containers:
+      - name: hello-waleed
+        # Replace $LOCATION with your Artifact Registry location (e.g., us-west1).
+        # Replace $GCLOUD_PROJECT with your project ID.
+        image: gcr.io/jenkins-pipeline-364010/hello-java:v1
+        # This app listens on port 8080 for web traffic by default.
+        ports:
+        - containerPort: 8080
+        env:
+          - name: PORT
+            value: "8080"
+
+
+-----
+apiVersion: v1
+kind: Service
+metadata:
+  name: hello-task
+spec:
+  type: LoadBalancer
+  selector:
+    app: hello-waleed
+  ports:
+  - port: 80
+    targetPort: 8080
