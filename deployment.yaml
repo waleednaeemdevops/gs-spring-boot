@@ -16,7 +16,8 @@ spec:
       - name: hello-waleed
         # Replace $LOCATION with your Artifact Registry location (e.g., us-west1).
         # Replace $GCLOUD_PROJECT with your project ID.
-        image: gcr.io/jenkins-pipeline-364010/hello-java:v1
+        #image: gcr.io/jenkins-pipeline-364010/hello-java:v1
+        image: gcr.io/jenkins-pipeline-364010/hello-java:tagversion
         # This app listens on port 8080 for web traffic by default.
         ports:
         - containerPort: 8080
